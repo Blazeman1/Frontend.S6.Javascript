@@ -1,0 +1,124 @@
+/* =========================================================
+   GameZone - Semana 6 (Actividad Sumativa)
+   Hoja de estilos externa: separa presentación de estructura,
+   se enlaza después de Bootstrap para poder sobrescribir estilos
+   puntuales y aprovechar la caché del navegador entre visitas.
+   ========================================================= */
+
+:root {
+  --gz-primario: #6f1ab8;
+  --gz-primario-oscuro: #4b0f80;
+  --gz-acento: #ffc107;
+}
+
+/* Enlace "saltar al contenido" para accesibilidad de teclado */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  background: var(--gz-acento);
+  color: #000;
+  padding: 0.5rem 1rem;
+}
+
+.bg-primary-gz {
+  background: linear-gradient(90deg, var(--gz-primario-oscuro), var(--gz-primario));
+}
+
+/* Carrusel */
+.carrusel-img {
+  height: 380px;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+@media (max-width: 576px) {
+  .carrusel-img { height: 220px; }
+}
+
+/* Indicador visual de pausa del carrusel por foco de teclado (accesibilidad) */
+#carruselGameZone.en-pausa::after {
+  content: "Pausado";
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.35rem;
+  font-size: 0.8rem;
+  z-index: 10;
+}
+
+/* Categorías activas en el navbar */
+.categoria-link.active {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Tarjetas de producto */
+.producto-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  height: 100%;
+}
+.producto-card:hover,
+.producto-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.35);
+}
+.producto-card img {
+  height: 190px;
+  object-fit: cover;
+}
+.producto-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+.producto-card .precio {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gz-acento);
+}
+.producto-card .acciones {
+  margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Carrito */
+.carrito-card .card-header {
+  background: var(--gz-primario-oscuro);
+  color: #fff;
+}
+#listaCarrito .item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+#listaCarrito .item-carrito .nombre-item {
+  font-weight: 600;
+}
+#listaCarrito .item-carrito small {
+  color: var(--bs-secondary-color);
+}
+
+/* Recién agregado: pequeña animación para reforzar feedback visual */
+@keyframes gz-flash {
+  0% { background-color: rgba(255, 193, 7, 0.35); }
+  100% { background-color: transparent; }
+}
+.item-carrito.recien-agregado {
+  animation: gz-flash 1s ease;
+}
+
+/* Toasts */
+#contenedorToasts {
+  z-index: 1080;
+}
+
+/* Mensajes de estado (carga / error de la Fetch API) */
+#estadoCatalogo .alert {
+  margin-bottom: 0;
+}
